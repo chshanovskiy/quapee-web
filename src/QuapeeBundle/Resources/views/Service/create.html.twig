@@ -1,0 +1,11 @@
+{% extends 'QuapeeBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h3><a href="{{ url('quapee') }}">Quapee</a> / New service</h3>
+        <hr>
+        <div class="">
+            {% include 'QuapeeBundle:Service:_form.html.twig' with {'form': form} %}
+        </div>
+    </div>
+{% endblock %}
