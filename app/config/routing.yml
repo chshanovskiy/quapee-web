@@ -1,0 +1,3 @@
+quapee:
+    resource: "@QuapeeBundle/Controller/"
+    type:     annotation
