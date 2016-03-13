@@ -2,6 +2,7 @@
 
 namespace QuapeeBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +36,18 @@ class Service
      */
     private $description;
 
+    /**
+     * @var \QuapeeBundle\Entity\Frontend[]
+     *
+     * @ORM\ManyToMany(targetEntity="QuapeeBundle\Entity\Frontend", mappedBy="services")
+     */
+    private $frontends;
+
+    public function __construct()
+    {
+        $this->frontends = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -44,6 +57,38 @@ class Service
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Service
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
     /**
@@ -70,28 +115,5 @@ class Service
         return $this;
     }
 
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Service
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }
 

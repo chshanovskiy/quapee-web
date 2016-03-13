@@ -13,6 +13,8 @@ class HomeController extends Controller
     public function indexAction()
     {
         $registry = $this->getDoctrine();
+        $frontends = $registry->getRepository('QuapeeBundle:Frontend')
+            ->findAll();
         $services = $registry->getRepository('QuapeeBundle:Service')
             ->findAll();
         $credentials = $registry->getRepository('QuapeeBundle:Credential')
@@ -21,6 +23,7 @@ class HomeController extends Controller
         return $this->render(
             'QuapeeBundle:Home:index.html.twig',
             [
+                'frontends' => $frontends,
                 'credentials' => $credentials,
                 'services' => $services,
             ]

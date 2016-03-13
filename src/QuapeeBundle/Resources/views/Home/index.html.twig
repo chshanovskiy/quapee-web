@@ -11,7 +11,7 @@
                         <button type="button" class="btn btn-primary btn-sm">New Alias</button>
                     </div>
                     <div class="btn-group pull-right" role="group">
-                        <button type="button" class="btn btn-default btn-sm">New App</button>
+                        <a href="{{ url('frontend_create') }}" class="btn btn-default btn-sm">New App</a>
                         <a href="{{ url('service_create') }}" class="btn btn-default btn-sm">New Service</a>
                         <a href="{{ url('credential_create') }}" class="btn btn-default btn-sm">New Credentials</a>
                     </div>
@@ -21,6 +21,7 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
+                {% include 'QuapeeBundle:Home:_frontends.html.twig' with {'frontends': frontends} %}
             </div>
             <div class="col-sm-4">
                 {% include 'QuapeeBundle:Home:_services.html.twig' with {'services': services} %}
