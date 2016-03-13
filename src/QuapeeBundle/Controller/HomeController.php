@@ -12,9 +12,15 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
+        $registry = $this->getDoctrine();
+        $credentials = $registry->getRepository('QuapeeBundle:Credential')
+            ->findAll();
+
         return $this->render(
             'QuapeeBundle:Home:index.html.twig',
-            []
+            [
+                'credentials' => $credentials,
+            ]
         );
     }
 
