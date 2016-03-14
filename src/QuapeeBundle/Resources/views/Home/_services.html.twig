@@ -1,6 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <span class="label label-danger">Services</span>
+        <span class="text-muted">
+            <b>Services</b>
+        </span>
+        <div class="btn-group pull-right" role="group">
+            <a href="{{ url('service_create') }}" class="btn btn-default btn-xs">Create</a>
+        </div>
     </div>
     {% if services %}
         <table class="table">

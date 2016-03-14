@@ -1,6 +1,11 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <span class="label label-success">Apps</span>
+        <span class="text-muted">
+            <b>Apps</b>
+        </span>
+        <div class="btn-group pull-right" role="group">
+            <a href="{{ url('frontend_create') }}" class="btn btn-default btn-xs">Create</a>
+        </div>
     </div>
     {% if frontends %}
         <table class="table">
