@@ -39,7 +39,7 @@ class Frontend
     /**
      * @var \QuapeeBundle\Entity\Service[]
      *
-     * @ORM\ManyToMany(targetEntity="QuapeeBundle\Entity\Service")
+     * @ORM\ManyToMany(targetEntity="QuapeeBundle\Entity\Service", inversedBy="frontends")
      */
     private $services;
 
