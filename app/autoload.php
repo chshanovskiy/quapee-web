@@ -9,8 +9,10 @@ use Dotenv\Dotenv;
  */
 $loader = require __DIR__.'/../vendor/autoload.php';
 
-$env = new Dotenv(dirname(__DIR__));
-$env->load();
+if ((int)getenv('USE_DOTENV') === 1) {
+    $env = new Dotenv(dirname(__DIR__));
+    $env->load();
+}
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
 

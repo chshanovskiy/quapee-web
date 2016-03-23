@@ -4,6 +4,9 @@
     <div class="container">
         <h3>Quapee</h3>
         <hr>
+        {% for alert in app.session.flashBag.get('alert') %}
+            <p class="alert alert-success">{{ alert }}</p>
+        {% endfor %}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="btn-toolbar">

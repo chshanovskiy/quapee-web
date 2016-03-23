@@ -1,27 +1,29 @@
 nginx:
-  image: nginx:latest
-  ports:
-    - "80"
-  links:
-    - upstream
-  volumes:
-    - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
-  volumes_from:
-    - upstream
-  restart: always
+    image: nginx:latest
+    ports:
+        - "80"
+    links:
+        - upstream
+    volumes:
+        - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    volumes_from:
+        - upstream
+    restart: always
 
 postgres:
-  image: postgres:latest
-  ports:
-    - "5432"
-  environment:
-    - POSTGRES_USER=quapee
-    - POSTGRES_PASSWORD=password
-  restart: always
+    image: postgres:latest
+    ports:
+        - "5432"
+    environment:
+        - POSTGRES_USER=quapee
+        - POSTGRES_PASSWORD=password
+    restart: always
 
 upstream:
-  build: ./etc/php
-  links:
-    - postgres
-  volumes:
-    - .:/var/www/html
+    build: ./etc/php
+    links:
+        - postgres
+    environment:
+        - USE_DOTENV=1
+    volumes:
+        - .:/var/www/html

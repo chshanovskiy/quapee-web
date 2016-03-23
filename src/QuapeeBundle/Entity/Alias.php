@@ -3,6 +3,8 @@
 namespace QuapeeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Alias
@@ -25,6 +27,7 @@ class Alias
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -32,6 +35,7 @@ class Alias
      * @var string
      *
      * @ORM\Column(name="uri", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $uri;
 
@@ -46,6 +50,7 @@ class Alias
      * @var \QuapeeBundle\Entity\Frontend
      *
      * @ORM\ManyToOne(targetEntity="QuapeeBundle\Entity\Frontend")
+     * @Assert\NotBlank()
      */
     private $frontend;
 
@@ -53,6 +58,7 @@ class Alias
      * @var \QuapeeBundle\Entity\Credential
      *
      * @ORM\ManyToOne(targetEntity="QuapeeBundle\Entity\Credential")
+     * @Assert\NotBlank()
      */
     private $credential;
 

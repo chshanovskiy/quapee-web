@@ -29,6 +29,9 @@ class AliasController extends Controller
             $em->persist($alias);
             $em->flush();
 
+            $message = sprintf('Alias "%s" successfully created.', $alias->getTitle());
+            $this->get('session')->getFlashBag()->add('alert', $message);
+
             return $this->redirectToRoute('quapee');
         }
 
@@ -55,8 +58,12 @@ class AliasController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($alias);
             $em->flush();
+
+            $message = sprintf('Alias "%s" successfully updated.', $alias->getTitle());
+            $this->get('session')->getFlashBag()->add('alert', $message);
 
             return $this->redirectToRoute('quapee');
         }
@@ -70,4 +77,48 @@ class AliasController extends Controller
         );
     }
 
+    /**
+     * @param \QuapeeBundle\Entity\Alias $alias
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/alias/delete/{id}", name="alias_delete")
+     * @ParamConverter("alias", class="QuapeeBundle:Alias")
+     */
+    public function deleteAction(Alias $alias)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($alias);
+        $em->flush();
+
+        $message = sprintf('Alias "%s" successfully deleted.', $alias->getTitle());
+        $this->get('session')->getFlashBag()->add('alert', $message);
+
+        return $this->redirectToRoute('quapee');
+    }
+
+    /**
+     * @param \QuapeeBundle\Entity\Alias $alias
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/alias/double/{id}", name="alias_double")
+     * @ParamConverter("alias", class="QuapeeBundle:Alias")
+     */
+    public function doubleAction(Alias $alias)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $double = clone $alias;
+
+        $title = sprintf('%s_%.6s', $double->getTitle(), uniqid('', true));
+        $double->setTitle($title);
+
+        $em->persist($double);
+        $em->flush();
+
+        $message = sprintf('Alias "%s" successfully duplicated.', $alias->getTitle());
+        $this->get('session')->getFlashBag()->add('alert', $message);
+
+        return $this->redirectToRoute('quapee');
+    }
 }

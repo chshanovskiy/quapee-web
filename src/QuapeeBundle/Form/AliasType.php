@@ -33,7 +33,7 @@ class AliasType extends AbstractType
                 ]
             )
             ->add('uri')
-            ->add('save', SubmitType::class);;
+            ->add('save', SubmitType::class);
     }
 
     /**

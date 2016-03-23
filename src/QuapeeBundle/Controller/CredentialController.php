@@ -29,6 +29,9 @@ class CredentialController extends Controller
             $em->persist($credential);
             $em->flush();
 
+            $message = sprintf('Credential "%s" successfully created.', $alias->getTitle());
+            $this->get('session')->getFlashBag()->add('alert', $message);
+
             return $this->redirectToRoute('quapee');
         }
 
@@ -57,6 +60,9 @@ class CredentialController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($credential);
             $em->flush();
+
+            $message = sprintf('Credential "%s" successfully updated.', $alias->getTitle());
+            $this->get('session')->getFlashBag()->add('alert', $message);
 
             return $this->redirectToRoute('quapee');
         }

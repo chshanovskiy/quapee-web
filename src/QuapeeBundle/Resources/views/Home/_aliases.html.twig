@@ -10,7 +10,10 @@
                     <span class="label label-success">{{ alias.frontend }}</span>
                 </td>
                 <td>
-                    <span class="label label-danger">{{ 'alias.services' }}</span>
+
+                    {% for service in alias.frontend.services %}
+                        <span class="label label-danger">{{ service.title }}</span>
+                    {% endfor %}
                 </td>
                 <td>
                     <span class="label label-default">{{ alias.uri }}</span>
@@ -26,8 +29,16 @@
                             <i class="glyphicon glyphicon-option-vertical"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="{{ url('alias_update', {'id': alias.id}) }}">Edit</a></li>
-                            <li><a href="#">Duplicate</a></li>
+                            <li>
+                                <a href="{{ url('alias_update', {'id': alias.id}) }}">Edit</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('alias_double', {'id': alias.id}) }}">Duplicate</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ url('alias_delete', {'id': alias.id}) }}">Delete</a>
+                            </li>
                         </ul>
                     </div>
                 </th>
