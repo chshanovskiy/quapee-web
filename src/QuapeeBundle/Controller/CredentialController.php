@@ -6,16 +6,18 @@ use QuapeeBundle\Entity\Credential;
 use QuapeeBundle\Form\CredentialType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/credential")
+ */
 class CredentialController extends Controller
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/credential/create", name="credential_create")
+     * @Route("/create")
+     * @Template("QuapeeBundle:Credential:create.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -29,27 +31,21 @@ class CredentialController extends Controller
             $em->persist($credential);
             $em->flush();
 
-            $message = sprintf('Credential "%s" successfully created.', $alias->getTitle());
+            $message = sprintf('Credential "%s" successfully created.', $credential->getTitle());
             $this->get('session')->getFlashBag()->add('alert', $message);
 
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Credential:create.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \QuapeeBundle\Entity\Credential $credential
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/credential/update/{id}", name="credential_update")
+     * @Route("/update/{id}")
      * @ParamConverter("credential", class="QuapeeBundle:Credential")
+     * @Template("QuapeeBundle:Credential:update.html.twig")
      */
     public function updateAction(Request $request, Credential $credential)
     {
@@ -61,19 +57,16 @@ class CredentialController extends Controller
             $em->persist($credential);
             $em->flush();
 
-            $message = sprintf('Credential "%s" successfully updated.', $alias->getTitle());
+            $message = sprintf('Credential "%s" successfully updated.', $credential->getTitle());
             $this->get('session')->getFlashBag()->add('alert', $message);
 
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Credential:update.html.twig',
-            [
-                'form' => $form->createView(),
-                'credential' => $credential,
-            ]
-        );
+        return [
+            'form'       => $form->createView(),
+            'credential' => $credential,
+        ];
     }
 
 }

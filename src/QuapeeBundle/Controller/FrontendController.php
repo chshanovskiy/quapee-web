@@ -6,16 +6,18 @@ use QuapeeBundle\Entity\Frontend;
 use QuapeeBundle\Form\FrontendType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/frontend")
+ */
 class FrontendController extends Controller
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/frontend/create", name="frontend_create")
+     * @Route("/create")
+     * @Template("QuapeeBundle:Frontend:create.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -32,21 +34,15 @@ class FrontendController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Frontend:create.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \QuapeeBundle\Entity\Frontend $frontend
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/frontend/update/{id}", name="frontend_update")
+     * @Route("/update/{id}")
      * @ParamConverter("frontend", class="QuapeeBundle:Frontend")
+     * @Template("QuapeeBundle:Frontend:update.html.twig")
      */
     public function updateAction(Request $request, Frontend $frontend)
     {
@@ -61,13 +57,10 @@ class FrontendController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Frontend:update.html.twig',
-            [
-                'form' => $form->createView(),
-                'frontend' => $frontend,
-            ]
-        );
+        return [
+            'form'     => $form->createView(),
+            'frontend' => $frontend,
+        ];
     }
 
 }

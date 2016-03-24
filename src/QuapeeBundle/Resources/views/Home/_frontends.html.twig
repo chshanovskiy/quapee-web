@@ -4,7 +4,7 @@
             <b>Apps</b>
         </span>
         <div class="btn-group pull-right" role="group">
-            <a href="{{ url('frontend_create') }}" class="btn btn-default btn-xs">Create</a>
+            <a href="{{ url('quapee_frontend_create') }}" class="btn btn-default btn-xs">Create</a>
         </div>
     </div>
     {% if frontends %}
@@ -25,7 +25,7 @@
                               title="{{ frontend.description }}">{{ frontend.title }}</span>
                     </td>
                     <td class="text-right">
-                        <a href="{{ url('frontend_update', {id: frontend.id}) }}"
+                        <a href="{{ url('quapee_frontend_update', {id: frontend.id}) }}"
                            class="btn btn-link btn-xs" title="Edit Credential">
                             <i class="glyphicon glyphicon-edit"></i>
                         </a>

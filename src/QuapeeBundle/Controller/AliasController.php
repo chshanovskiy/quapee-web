@@ -4,18 +4,21 @@ namespace QuapeeBundle\Controller;
 
 use QuapeeBundle\Entity\Alias;
 use QuapeeBundle\Form\AliasType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/alias")
+ */
 class AliasController extends Controller
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/alias/create", name="alias_create")
+     * @Route("/create")
+     * @Template("QuapeeBundle:Alias:create.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -35,21 +38,15 @@ class AliasController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Alias:create.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \QuapeeBundle\Entity\Alias $alias
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/alias/update/{id}", name="alias_update")
+     * @Route("/update/{id}")
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
+     * @Template("QuapeeBundle:Alias:update.html.twig")
      */
     public function updateAction(Request $request, Alias $alias)
     {
@@ -68,20 +65,15 @@ class AliasController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Alias:update.html.twig',
-            [
-                'form' => $form->createView(),
-                'alias' => $alias,
-            ]
-        );
+        return [
+            'form'  => $form->createView(),
+            'alias' => $alias,
+        ];
     }
 
     /**
-     * @param \QuapeeBundle\Entity\Alias $alias
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/alias/delete/{id}", name="alias_delete")
+     * @Route("/delete/{id}")
+     * @Method({"POST"})
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
      */
     public function deleteAction(Alias $alias)
@@ -98,10 +90,7 @@ class AliasController extends Controller
     }
 
     /**
-     * @param \QuapeeBundle\Entity\Alias $alias
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/alias/double/{id}", name="alias_double")
+     * @Route("/double/{id}")
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
      */
     public function doubleAction(Alias $alias)

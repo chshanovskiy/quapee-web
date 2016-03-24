@@ -4,7 +4,7 @@
             <b>Services</b>
         </span>
         <div class="btn-group pull-right" role="group">
-            <a href="{{ url('service_create') }}" class="btn btn-default btn-xs">Create</a>
+            <a href="{{ url('quapee_service_create') }}" class="btn btn-default btn-xs">Create</a>
         </div>
     </div>
     {% if services %}
@@ -25,7 +25,7 @@
                               title="{{ service.description }}">{{ service.title }}</span>
                     </td>
                     <td class="text-right">
-                        <a href="{{ url('service_update', {id: service.id}) }}"
+                        <a href="{{ url('quapee_service_update', {id: service.id}) }}"
                            class="btn btn-link btn-xs" title="Edit Credential">
                             <i class="glyphicon glyphicon-edit"></i>
                         </a>

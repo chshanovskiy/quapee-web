@@ -6,16 +6,18 @@ use QuapeeBundle\Entity\Service;
 use QuapeeBundle\Form\ServiceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/service")
+ */
 class ServiceController extends Controller
 {
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/service/create", name="service_create")
+     * @Route("/create")
+     * @Template("QuapeeBundle:Service:create.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -32,21 +34,15 @@ class ServiceController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Service:create.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return [
+            'form' => $form->createView(),
+        ];
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \QuapeeBundle\Entity\Service $service
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/service/update/{id}", name="service_update")
+     * @Route("/update/{id}")
      * @ParamConverter("service", class="QuapeeBundle:Service")
+     * @Template("QuapeeBundle:Service:update.html.twig")
      */
     public function updateAction(Request $request, Service $service)
     {
@@ -61,13 +57,10 @@ class ServiceController extends Controller
             return $this->redirectToRoute('quapee');
         }
 
-        return $this->render(
-            'QuapeeBundle:Service:update.html.twig',
-            [
-                'form' => $form->createView(),
-                'service' => $service,
-            ]
-        );
+        return [
+            'form'    => $form->createView(),
+            'service' => $service,
+        ];
     }
 
 }
