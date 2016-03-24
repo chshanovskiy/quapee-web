@@ -18,20 +18,8 @@ class AliasType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add(
-                'frontend',
-                EntityType::class,
-                [
-                    'class' => 'QuapeeBundle\Entity\Frontend',
-                ]
-            )
-            ->add(
-                'credential',
-                EntityType::class,
-                [
-                    'class' => 'QuapeeBundle\Entity\Credential',
-                ]
-            )
+            ->add('frontend', EntityType::class, ['class' => 'QuapeeBundle\Entity\Frontend'])
+            ->add('credential', EntityType::class, ['class' => 'QuapeeBundle\Entity\Credential'])
             ->add('uri')
             ->add('save', SubmitType::class);
     }
@@ -41,10 +29,6 @@ class AliasType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'QuapeeBundle\Entity\Alias',
-            )
-        );
+        $resolver->setDefaults(['data_class' => 'QuapeeBundle\Entity\Alias']);
     }
 }

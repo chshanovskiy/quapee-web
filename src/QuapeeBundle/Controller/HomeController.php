@@ -3,14 +3,16 @@
 namespace QuapeeBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class HomeController extends Controller
 {
     /**
      * @Route("/quapee", name="quapee")
+     * @Template("QuapeeBundle:Home:index.html.twig")
      */
-    public function indexAction()
+    public function quapeeAction()
     {
         $registry = $this->getDoctrine();
         $aliases = $registry->getRepository('QuapeeBundle:Alias')
@@ -22,15 +24,11 @@ class HomeController extends Controller
         $credentials = $registry->getRepository('QuapeeBundle:Credential')
             ->findAll();
 
-        return $this->render(
-            'QuapeeBundle:Home:index.html.twig',
-            [
-                'aliases' => $aliases,
-                'frontends' => $frontends,
-                'credentials' => $credentials,
-                'services' => $services,
-            ]
-        );
+        return [
+            'aliases'     => $aliases,
+            'frontends'   => $frontends,
+            'credentials' => $credentials,
+            'services'    => $services,
+        ];
     }
-
 }

@@ -28,10 +28,6 @@ class CredentialType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'QuapeeBundle\Entity\Credential',
-            )
-        );
+        $resolver->setDefaults(['data_class' => 'QuapeeBundle\Entity\Credential']);
     }
 }

@@ -26,10 +26,6 @@ class ServiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'QuapeeBundle\Entity\Service',
-            )
-        );
+        $resolver->setDefaults(['data_class' => 'QuapeeBundle\Entity\Service']);
     }
 }

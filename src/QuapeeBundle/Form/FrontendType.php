@@ -19,14 +19,7 @@ class FrontendType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add(
-                'services',
-                EntityType::class,
-                [
-                    'class' => 'QuapeeBundle:Service',
-                    'multiple' => true,
-                ]
-            )
+            ->add('services', EntityType::class, ['class' => 'QuapeeBundle:Service', 'multiple' => true])
             ->add('save', SubmitType::class);
     }
 
@@ -35,10 +28,6 @@ class FrontendType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'QuapeeBundle\Entity\Frontend',
-            )
-        );
+        $resolver->setDefaults(['data_class' => 'QuapeeBundle\Entity\Frontend',]);
     }
 }
