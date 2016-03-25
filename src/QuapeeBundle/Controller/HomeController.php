@@ -3,6 +3,7 @@
 namespace QuapeeBundle\Controller;
 
 use QuapeeBundle\Proxy\Core\Proxy;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -41,6 +42,7 @@ class HomeController extends Controller
      * @return Response
      *
      * @Route("/api", name="api")
+     * @Method("POST")
      */
     public function apiAction(Request $request)
     {
