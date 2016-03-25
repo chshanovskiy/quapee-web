@@ -3,10 +3,6 @@
 namespace QuapeeBundle\Controller;
 
 use QuapeeBundle\Proxy\Core\Proxy;
-use QuapeeBundle\Proxy\Core\RequestFactory;
-use QuapeeBundle\Proxy\Core\RequestValidator;
-use QuapeeBundle\Proxy\Impl\DatabaseServiceCredentialsRepository;
-use QuapeeBundle\Proxy\Impl\SoapServiceFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -44,16 +40,7 @@ class HomeController extends Controller
      */
     public function apiAction(Request $request)
     {
-        $proxy = new Proxy(
-            new RequestFactory(
-                new RequestValidator()
-            ),
-            new SoapServiceFactory(
-                new DatabaseServiceCredentialsRepository(
-                    $this->getDoctrine()->getConnection()
-                )
-            )
-        );
+        $proxy = $this->get('quapee.proxy');
 
         if (strpos($request->headers->get('Content-Type'), 'application/json') === false) {
             return new Response('', Response::HTTP_BAD_REQUEST);
