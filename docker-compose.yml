@@ -20,11 +20,24 @@ postgres:
         - POSTGRES_PASSWORD=password
     restart: always
 
+memcached:
+    image: memcached:latest
+
 upstream:
     build: ./etc/php
     links:
         - postgres
+        - memcached
     environment:
         - USE_DOTENV=1
     volumes:
         - .:/var/www/html
+        - ./var/bootstrap.php.cache:/var/www/html/var/bootstrap.php.cache
+        - ./var/SymfonyRequirements.php:/var/www/html/var/SymfonyRequirements.php
+    volumes_from:
+        - upstream_data
+
+upstream_data:
+    image: tianon/true
+    volumes:
+        - /tmp:/var/www/html/var

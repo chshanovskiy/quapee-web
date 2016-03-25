@@ -1,13 +1,12 @@
-FROM php:7-fpm
+FROM php:5.6-fpm
 
 RUN apt-get update
-RUN apt-get upgrade -my
-RUN apt-get install libpq-dev libxml2-dev -my --no-install-recommends
+RUN apt-get install libpq-dev libxml2-dev libz-dev libmemcached-dev -y --no-install-recommends
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install opcache pdo_pgsql soap
-RUN pecl install xdebug
-RUN docker-php-ext-enable xdebug
+RUN pecl install xdebug memcached
+RUN docker-php-ext-enable xdebug memcached
 
 COPY ./php.ini /usr/local/etc/php/conf.d/00-custom.ini
 
