@@ -24,11 +24,13 @@ class Proxy
     /**
      * Конструктор
      *
-     * @param RequestFactory $requestFactory Фабрика запросов
+     * @param RequestFactory          $requestFactory Фабрика запросов
      * @param ServiceFactoryInterface $serviceFactory Фабрика сервисов
      */
-    public function __construct(RequestFactory $requestFactory, ServiceFactoryInterface $serviceFactory)
-    {
+    public function __construct(
+        RequestFactory $requestFactory,
+        ServiceFactoryInterface $serviceFactory
+    ) {
         $this->requestFactory = $requestFactory;
         $this->serviceFactory = $serviceFactory;
     }

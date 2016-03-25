@@ -3,15 +3,19 @@
 namespace QuapeeBundle\Proxy\Impl;
 
 use Doctrine\DBAL\Connection;
+use QuapeeBundle\Proxy\Core\Credential;
+use QuapeeBundle\Proxy\Core\CredentialRepositoryInterface;
+use QuapeeBundle\Proxy\Core\ProxyErrorException;
 use QuapeeBundle\Proxy\Core\Request;
-use QuapeeBundle\Proxy\Core\ServiceCredentials;
-use QuapeeBundle\Proxy\Core\ServiceCredentialsRepositoryInterface;
 
 /**
  * Класс представляет из себя хранилище конфигураций внешних сервисов в базе данных
  */
-class DatabaseServiceCredentialsRepository implements ServiceCredentialsRepositoryInterface
+class DatabaseCredentialRepository implements CredentialRepositoryInterface
 {
+    const ERROR__URI_NOT_FOUND = 'Service URI not found';
+    const SERVICE_URI = 'http://%s/%s?WSDL';
+
     /**
      * Соединение с базой данных
      *
@@ -23,8 +27,6 @@ class DatabaseServiceCredentialsRepository implements ServiceCredentialsReposito
      * Конструктор
      *
      * @param Connection $adapter Соединение с базой данных
-     *
-     * @codeCoverageIgnore
      */
     public function __construct(Connection $adapter)
     {
@@ -36,18 +38,21 @@ class DatabaseServiceCredentialsRepository implements ServiceCredentialsReposito
      *
      * @param Request $request Запрос
      *
-     * @return ServiceCredentials
-     *
-     * @codeCoverageIgnore
+     * @return Credential
+     * @throws ProxyErrorException
      */
     public function find(Request $request)
     {
-        $alias = $this->fetch($request->extract());
+        $data = $this->fetch($request->extract());
 
-        return new ServiceCredentials(
-            $alias['uri'],
-            $alias['username'],
-            $alias['password']
+        if (!array_key_exists('uri', $data)) {
+            throw new ProxyErrorException(self::ERROR__URI_NOT_FOUND);
+        }
+
+        return new Credential(
+            sprintf(self::SERVICE_URI, $data['uri'], $request->service),
+            $data['username'],
+            $data['password']
         );
     }
 
@@ -57,8 +62,6 @@ class DatabaseServiceCredentialsRepository implements ServiceCredentialsReposito
      * @param string[] $params Параметры запроса
      *
      * @return string[]
-     *
-     * @codeCoverageIgnore
      */
     private function fetch(array $params)
     {

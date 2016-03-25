@@ -5,14 +5,15 @@ namespace QuapeeBundle\Proxy\Core;
 /**
  * Интерфейс для связи с хранилищем
  */
-interface ServiceCredentialsRepositoryInterface
+interface CredentialRepositoryInterface
 {
     /**
      * Возвращает реквизиты доступа к сервису
      *
      * @param Request $request Запрос
      *
-     * @return ServiceCredentials
+     * @return Credential
+     * @throws ProxyErrorException
      */
     public function find(Request $request);
 }

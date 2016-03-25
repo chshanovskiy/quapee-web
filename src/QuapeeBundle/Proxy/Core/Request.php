@@ -17,7 +17,7 @@ class Request
     /**
      * Аргументы
      *
-     * @var mixed[]
+     * @var array
      */
     public $args;
 
@@ -45,7 +45,7 @@ class Request
     /**
      * Возвращает внутреннее представление
      *
-     * @return mixed[]
+     * @return array
      */
     public function extract()
     {

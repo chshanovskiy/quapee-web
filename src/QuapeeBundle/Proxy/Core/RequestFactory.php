@@ -27,7 +27,7 @@ class RequestFactory
     /**
      * Возвращает запрос из входных данных
      *
-     * @param mixed[] $json Входные данные
+     * @param array $json Входные данные
      *
      * @return Request
      *
@@ -37,7 +37,7 @@ class RequestFactory
     {
         $request = new Request();
         $this->validator->validate($request, $json);
-        $this->fill($request, $json);
+        $this->hydrate($request, $json);
 
         return $request;
     }
@@ -46,11 +46,11 @@ class RequestFactory
      * Наполняет объект запроса входными данными
      *
      * @param Request $request Запрос
-     * @param mixed[] $json Входные данные
+     * @param array   $json    Входные данные
      *
      * @return void
      */
-    private function fill(Request $request, array $json)
+    private function hydrate(Request $request, array $json)
     {
         $fields = array_keys(get_object_vars($request));
         foreach ($fields as $field) {

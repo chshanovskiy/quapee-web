@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,6 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 class FrontendController extends Controller
 {
     /**
+     * @param Request $request
+     * @return array|RedirectResponse
+     *
      * @Route("/create")
      * @Template("QuapeeBundle:Frontend:create.html.twig")
      */
@@ -40,6 +44,10 @@ class FrontendController extends Controller
     }
 
     /**
+     * @param Request  $request
+     * @param Frontend $frontend
+     * @return array|RedirectResponse
+     *
      * @Route("/update/{id}")
      * @ParamConverter("frontend", class="QuapeeBundle:Frontend")
      * @Template("QuapeeBundle:Frontend:update.html.twig")
@@ -62,5 +70,4 @@ class FrontendController extends Controller
             'frontend' => $frontend,
         ];
     }
-
 }

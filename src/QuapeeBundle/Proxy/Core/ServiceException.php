@@ -13,8 +13,6 @@ class ServiceException extends \ErrorException
      * Конструктор
      *
      * @param string $message Ошибка
-     *
-     * @codeCoverageIgnore
      */
     public function __construct($message)
     {

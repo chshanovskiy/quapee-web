@@ -60,9 +60,22 @@ class Response
     }
 
     /**
+     * Возвращает сериализованное json представление
+     *
+     * @return string
+     */
+    public function json()
+    {
+        return json_encode(
+            $this->extract(),
+            JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE
+        );
+    }
+
+    /**
      * Возвращает внутреннее представление
      *
-     * @return mixed[]
+     * @return array
      */
     public function extract()
     {

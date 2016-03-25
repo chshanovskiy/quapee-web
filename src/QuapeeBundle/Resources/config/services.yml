@@ -5,7 +5,7 @@ services:
         class: QuapeeBundle\Proxy\Core\RequestFactory
         arguments: ['@quapee.request_validator']
     quapee.credential_repository:
-        class: QuapeeBundle\Proxy\Impl\DatabaseServiceCredentialsRepository
+        class: QuapeeBundle\Proxy\Impl\DatabaseCredentialRepository
         arguments: ['@doctrine.dbal.default_connection']
     quapee.service_factory:
         class: QuapeeBundle\Proxy\Impl\SoapServiceFactory

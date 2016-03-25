@@ -27,7 +27,7 @@ class ResponseError
     /**
      * Возвращает внутреннее представление
      *
-     * @return mixed[]
+     * @return array
      */
     public function extract()
     {

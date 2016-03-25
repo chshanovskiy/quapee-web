@@ -13,7 +13,7 @@ class RequestValidator
      * Валидирует входные данные
      *
      * @param Request $request Запрос
-     * @param mixed[] $data Входные данные
+     * @param array   $data    Входные данные
      *
      * @return void
      *
@@ -21,18 +21,13 @@ class RequestValidator
      */
     public function validate(Request $request, array $data)
     {
-        $errors = [];
         $fields = array_keys(get_object_vars($request));
 
         foreach ($fields as $field) {
             if (!array_key_exists($field, $data)) {
-                $errors[] = sprintf(self::ERROR__FIELD_REQUIRED, $field);
+                $message = sprintf(self::ERROR__FIELD_REQUIRED, $field);
+                throw new ProxyErrorException($message);
             }
-        }
-
-        if (count($errors) !== 0) {
-            $message = implode(PHP_EOL, $errors);
-            throw new ProxyErrorException($message);
         }
     }
 }

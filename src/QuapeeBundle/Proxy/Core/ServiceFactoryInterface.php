@@ -10,9 +10,9 @@ interface ServiceFactoryInterface
     /**
      * Конструктор
      *
-     * @param ServiceCredentialsRepositoryInterface $credentials Хранилище реквизитов
+     * @param CredentialRepositoryInterface $credentials Хранилище реквизитов
      */
-    public function __construct(ServiceCredentialsRepositoryInterface $credentials);
+    public function __construct(CredentialRepositoryInterface $credentials);
 
     /**
      * Возвращает сервис, который соответствует запросу

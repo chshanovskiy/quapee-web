@@ -167,6 +167,4 @@ class Credential
 
         return $this;
     }
-
 }
-

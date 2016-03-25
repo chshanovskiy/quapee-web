@@ -13,8 +13,6 @@ class ProxyErrorException extends \ErrorException
      * Конструктор
      *
      * @param string $message Текст ошибки
-     *
-     * @codeCoverageIgnore
      */
     public function __construct($message)
     {

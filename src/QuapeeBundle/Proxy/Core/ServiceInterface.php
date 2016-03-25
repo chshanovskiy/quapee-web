@@ -10,9 +10,9 @@ interface ServiceInterface
     /**
      * Конструктор
      *
-     * @param ServiceCredentials $credentials Реквизиты сервиса
+     * @param Credential $credentials Реквизиты сервиса
      */
-    public function __construct(ServiceCredentials $credentials);
+    public function __construct(Credential $credentials);
 
     /**
      * Возвращает данные от внешнего сервиса

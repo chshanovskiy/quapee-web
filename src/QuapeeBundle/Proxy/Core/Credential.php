@@ -5,17 +5,17 @@ namespace QuapeeBundle\Proxy\Core;
 /**
  * Класс для передачи конфигурации внешнего сервиса
  */
-class ServiceCredentials
+class Credential
 {
     /**
      * Ссылка на сервис
      *
      * @var string
      */
-    public $url;
+    public $uri;
 
     /**
-     * Пользователь
+     * Имя пользователя
      *
      * @var string
      */
@@ -31,13 +31,13 @@ class ServiceCredentials
     /**
      * Конструктор
      *
-     * @param string $url Ссылка на сервис
-     * @param string $user Пользователь
+     * @param string $uri  Ссылка на сервис
+     * @param string $user Имя пользователя
      * @param string $pass Пароль
      */
-    public function __construct($url, $user, $pass)
+    public function __construct($uri, $user, $pass)
     {
-        $this->url = $url;
+        $this->uri = $uri;
         $this->user = $user;
         $this->pass = $pass;
     }

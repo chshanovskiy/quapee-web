@@ -3,8 +3,8 @@
 namespace QuapeeBundle\Proxy\Impl;
 
 use Exception;
+use QuapeeBundle\Proxy\Core\Credential;
 use QuapeeBundle\Proxy\Core\Request;
-use QuapeeBundle\Proxy\Core\ServiceCredentials;
 use QuapeeBundle\Proxy\Core\ServiceException;
 use QuapeeBundle\Proxy\Core\ServiceInterface;
 use SoapClient;
@@ -24,18 +24,16 @@ class SoapService implements ServiceInterface
     /**
      * Конструктор
      *
-     * @param ServiceCredentials $credentials Реквизиты сервиса
-     *
-     * @codeCoverageIgnore
+     * @param Credential $credentials Реквизиты сервиса
      */
-    public function __construct(ServiceCredentials $credentials)
+    public function __construct(Credential $credentials)
     {
         $options = [
             'login'    => $credentials->user,
             'password' => $credentials->pass,
         ];
 
-        $this->adapter = new SoapClient($credentials->url, $options);
+        $this->adapter = new SoapClient($credentials->uri, $options);
     }
 
     /**
@@ -45,8 +43,6 @@ class SoapService implements ServiceInterface
      *
      * @return mixed
      * @throws ServiceException
-     *
-     * @codeCoverageIgnore
      */
     public function fetch(Request $request)
     {

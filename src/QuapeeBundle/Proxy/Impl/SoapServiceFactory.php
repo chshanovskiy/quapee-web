@@ -2,8 +2,8 @@
 
 namespace QuapeeBundle\Proxy\Impl;
 
+use QuapeeBundle\Proxy\Core\CredentialRepositoryInterface;
 use QuapeeBundle\Proxy\Core\Request;
-use QuapeeBundle\Proxy\Core\ServiceCredentialsRepositoryInterface;
 use QuapeeBundle\Proxy\Core\ServiceFactoryInterface;
 use QuapeeBundle\Proxy\Core\ServiceInterface;
 
@@ -15,18 +15,16 @@ class SoapServiceFactory implements ServiceFactoryInterface
     /**
      * Хранилище реквизитов
      *
-     * @var ServiceCredentialsRepositoryInterface
+     * @var CredentialRepositoryInterface
      */
     private $credentialsRepository;
 
     /**
      * Конструктор
      *
-     * @param ServiceCredentialsRepositoryInterface $credentials Хранилище реквизитов
-     *
-     * @codeCoverageIgnore
+     * @param CredentialRepositoryInterface $credentials Хранилище реквизитов
      */
-    public function __construct(ServiceCredentialsRepositoryInterface $credentials)
+    public function __construct(CredentialRepositoryInterface $credentials)
     {
         $this->credentialsRepository = $credentials;
     }
@@ -37,8 +35,6 @@ class SoapServiceFactory implements ServiceFactoryInterface
      * @param Request $request Запрос
      *
      * @return ServiceInterface
-     *
-     * @codeCoverageIgnore
      */
     public function match(Request $request)
     {
