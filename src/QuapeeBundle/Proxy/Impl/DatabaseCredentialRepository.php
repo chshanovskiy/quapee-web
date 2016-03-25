@@ -45,7 +45,7 @@ class DatabaseCredentialRepository implements CredentialRepositoryInterface
     {
         $data = $this->fetch($request->extract());
 
-        if (!array_key_exists('uri', $data)) {
+        if ($data === false) {
             throw new ProxyErrorException(self::ERROR__URI_NOT_FOUND);
         }
 
