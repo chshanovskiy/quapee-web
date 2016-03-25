@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ServiceController extends Controller
 {
     /**
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Route("/create")
      * @Template("QuapeeBundle:Service:create.html.twig")
      */
@@ -40,6 +43,10 @@ class ServiceController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Service $service
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Route("/update/{id}")
      * @ParamConverter("service", class="QuapeeBundle:Service")
      * @Template("QuapeeBundle:Service:update.html.twig")
@@ -62,5 +69,4 @@ class ServiceController extends Controller
             'service' => $service,
         ];
     }
-
 }

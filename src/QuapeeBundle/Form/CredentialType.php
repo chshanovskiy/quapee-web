@@ -7,11 +7,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * CredentialType
+ */
 class CredentialType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,10 +31,6 @@ class CredentialType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            array(
-                'data_class' => 'QuapeeBundle\Entity\Credential',
-            )
-        );
+        $resolver->setDefaults(['data_class' => 'QuapeeBundle\Entity\Credential']);
     }
 }

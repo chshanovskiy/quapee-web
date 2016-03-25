@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -16,6 +17,9 @@ use Symfony\Component\HttpFoundation\Request;
 class CredentialController extends Controller
 {
     /**
+     * @param Request $request
+     * @return array|RedirectResponse
+     *
      * @Route("/create")
      * @Template("QuapeeBundle:Credential:create.html.twig")
      */
@@ -43,6 +47,10 @@ class CredentialController extends Controller
     }
 
     /**
+     * @param Request    $request
+     * @param Credential $credential
+     * @return array|RedirectResponse
+     *
      * @Route("/update/{id}")
      * @ParamConverter("credential", class="QuapeeBundle:Credential")
      * @Template("QuapeeBundle:Credential:update.html.twig")
@@ -68,5 +76,4 @@ class CredentialController extends Controller
             'credential' => $credential,
         ];
     }
-
 }

@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Frontend
  *
@@ -46,6 +45,9 @@ class Frontend
      */
     private $services;
 
+    /**
+     * Frontend constructor
+     */
     public function __construct()
     {
         $this->services = new ArrayCollection();
@@ -132,6 +134,4 @@ class Frontend
 
         return $this;
     }
-
 }
-

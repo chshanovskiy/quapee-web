@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -17,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AliasController extends Controller
 {
     /**
+     * @param Request $request
+     * @return array|RedirectResponse
+     *
      * @Route("/create")
      * @Template("QuapeeBundle:Alias:create.html.twig")
      */
@@ -44,6 +48,10 @@ class AliasController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Alias   $alias
+     * @return array|RedirectResponse
+     *
      * @Route("/update/{id}")
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
      * @Template("QuapeeBundle:Alias:update.html.twig")
@@ -72,6 +80,9 @@ class AliasController extends Controller
     }
 
     /**
+     * @param Alias $alias
+     * @return RedirectResponse
+     *
      * @Route("/delete/{id}")
      * @Method({"POST"})
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
@@ -90,6 +101,9 @@ class AliasController extends Controller
     }
 
     /**
+     * @param Alias $alias
+     * @return RedirectResponse
+     *
      * @Route("/double/{id}")
      * @ParamConverter("alias", class="QuapeeBundle:Alias")
      */
